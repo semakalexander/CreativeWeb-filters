@@ -31,66 +31,32 @@
                 });
             });
         });
+
+       
     </script>
 </head>
 <body>
     <nav class="pushy pushy-left">
         <ul>
+            <li><h1>Категорії</h1></li>
             <li>@Html.ActionLink("Penzlyk", "SelectType", "Home", new { type = "Penzlyk" }, new { @class = "pushy-link" })</li>
             <li>@Html.ActionLink("Pidramnyk", "SelectType", "Home", new { type = "Pidramnyk" }, new { @class = "pushy-link" })</li>
             <li>@Html.ActionLink("Pydramnik", "SelectType", "Home", new { type = "Pydramnik" }, new { @class = "pushy-link" })</li>
-
-
-
-
-
+            <li>@Html.ActionLink("Penzlyk", "SelectType", "Home", new { type = "Penzlyk" }, new { @class = "pushy-link" })</li>
+            <li>@Html.ActionLink("Pidramnyk", "SelectType", "Home", new { type = "Pidramnyk" }, new { @class = "pushy-link" })</li>
+            <li>@Html.ActionLink("Pydramnik", "SelectType", "Home", new { type = "Pydramnik" }, new { @class = "pushy-link" })</li>
+        
         </ul>
-        @{
-            Cart cart = (Cart)Session["Cart"];
-            if (cart != null && cart.Lines.Count() > 0)
-            {
-                <div id="cart-panel">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h4>Корзина </h4>
-                        </div>
-                        <div class="panel-body">
-                            @Html.ActionLink("Перейти до корзини", "Index", "Cart", new { returnUrl = Request.Url.PathAndQuery }, null)
-                            @foreach (var line in cart.Lines)
-                            {
-
-                                <div class="row cart-item">
-                                    <img src="@line.Item.ImageSrc" alt="" class="cart-item-img" />
-                                    <p>
-                                        @line.Item.Name - @line.Quantity шт.
-                                    </p>
-                                </div>
-                                <br />
-                            }
-                        </div>
-                    </div>
-                </div>
-            }
-        }
+        
     </nav>
+
+   
     <!-- Site Overlay -->
     <div class="site-overlay"></div>
 
     <!-- Your Content -->
     <div id="container">
         <!-- Menu Button -->
-        <div class="menu-btn">&#9776; Категорії</div>
-
-        @{
-            cart = (Cart)Session["Cart"];
-            if (cart != null && cart.Lines.Count() > 0)
-            {
-                @Html.ActionLink(" ", "Index", "Cart", null, new { @class = "btn btn-default btn-cart" })
-            }
-        }
-
-
-
         <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 
             <div class="container-fluid">
@@ -118,6 +84,24 @@
                 </ul>
             </div>
         </div>
+
+
+
+        <div class="categories-menu-btn"> 
+            <div class="menu-btn">&#9776; Категорії</div>
+        </div>
+    
+
+        @{
+            Cart cart = (Cart)Session["Cart"];
+            if (cart != null && cart.Lines.Count() > 0)
+            {
+              @Html.ActionLink(" ", "Index", "Cart", null, new { @class = "btn btn-default btn-cart" })
+            }
+        }
+      
+
+
         <div class="body-content">
             <div class="row">
                 @*       <div id="categories-left" class="col-md-2">
@@ -186,6 +170,7 @@
 
 
     </div>
+   
     <footer></footer>
     @RenderSection("scripts", required: false)
     <script src="~/Scripts/pushy.min.js"></script>
