@@ -1,0 +1,16 @@
+﻿@model CreativeWeb.Models.Item
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/_AdminLayout.cshtml";
+}
+
+<div class="panel text-center">
+  
+        <h2>Видалити товар @Model.Name?</h2>
+        @using (Html.BeginForm())
+        {
+            @Html.ActionLink("Ні, повернутись назад", "Index", "Admin", null, new { @class = "btn btn-default" })
+            <input type="submit" value="Так, ВИДАЛИТИ" class="btn btn-danger" />
+        }
+   
+</div>

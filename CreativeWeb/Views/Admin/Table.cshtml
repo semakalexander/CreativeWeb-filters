@@ -1,0 +1,72 @@
+﻿@model PagedList.IPagedList<CreativeWeb.Models.Item>
+    
+@using PagedList.Mvc;
+
+<div id="result">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Список товарів</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered table-striped table-condensed">
+                <tr>
+                    <th>Id</th>
+                    <th>Barcode</th>
+                    <th>Назва</th>
+                    <th>Опис</th>
+                    <th class="text-center">Тип</th>
+                    <th class="text-right">Кількість</th>
+                    <th class="text-right">Ціна</th>
+                    <th></th>
+
+                </tr>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Barcode</td>
+                        <td>@Html.ActionLink(item.Name, "Edit", new { id = item.Id })</td>
+                        <td>@item.Description</td>
+                        <td class="text-center">@item.Type</td>
+                        <td class="text-right">@item.Count</td>
+                        <td class="text-right">@item.Price.ToString("#.## грн")</td>
+                        <td class="text-center">
+                            @using (Html.BeginForm("Delete", "Admin", FormMethod.Get))
+                            {
+                                @Html.Hidden("id", item.Id)
+                                <input type="submit" value="Видалити" class="btn btn-warning btn-xs" />
+                            }
+                        </td>
+                    </tr>
+                }
+
+            </table>
+         
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { selectedType = Model.FirstOrDefault().Type, page }))
+        </div>
+        <div class="panel-footer">
+            @Html.ActionLink("Додати товар", "Create", null, new { @class = "btn btn-default" })
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        $(".page").on("click", function () {
+            var page = $('.page').val(); _
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("SelectCategory","Admin")' + '?selectedType=' + selectedType + '&page=' + page,
+                contentType: false,
+                processData: false,
+                success: function (result) {
+                    $("#result").empty();
+                    $("#result").html(result);
+                },
+                error: function (xhr, status, p3) {
+                    alert(xhr.responseText);
+                }
+            });
+        });
+        
+    </script>
+    }

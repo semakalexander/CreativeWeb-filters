@@ -1,0 +1,58 @@
+﻿@model CreativeWeb.Models.CartIndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Корзина</h2>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th class="text-center">Назва</th>
+            <th class="text-center">Опис</th>
+            <th class="text-center">Категорія</th>
+            <th class="text-right">Кількість</th>
+            <th class="text-right">Ціна</th>
+            <th class="text-right">Всього</th>
+           
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var line in Model.Cart.Lines)
+        {
+            <tr>
+                <td class="text-center">@line.Item.Name</td>
+                <td class="text-center">@line.Item.Description</td>
+                <td class="text-center">@line.Item.Type</td>
+                <td class="text-right">@line.Quantity</td>
+                <td class="text-right">@line.Item.Price</td>
+                <td class="text-right">
+                    @((line.Item.Price * line.Quantity).ToString("#.## грн"))
+                </td>
+                <td>
+                    @using (Html.BeginForm("RemoveFromCart", "Cart"))
+                    {
+                        @Html.Hidden("ItemId", @line.Item.Id)
+                        @Html.HiddenFor(m => m.ReturnUrl)
+                        <input type="submit" value="Видалити" class="btn btn-danger btn-sm" />
+                    }
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="5" class="text-right">Всього</td>
+            <td class="text-right">@Model.Cart.ComputeTotalValue().ToString("#.## грн")</td>
+        </tr>
+    </tfoot>
+</table>
+
+<div class="text-center">
+    <a href="@Model.ReturnUrl" class="btn btn-primary">Продовжити купівлю</a>
+    @Html.ActionLink("Оформити замовлення", "Checkout", null, new { @class = "btn btn-success" })
+</div>

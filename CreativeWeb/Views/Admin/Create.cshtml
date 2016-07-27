@@ -1,0 +1,77 @@
+﻿@model CreativeWeb.Models.Item
+@{
+    ViewBag.Title = "Адмін панель: додавання товару";
+    Layout = "~/Views/_AdminLayout.cshtml";
+}
+
+<script type="text/javascript">
+    function myfunc() {
+        $('#upload-file-info').html($(this).val());
+        $("input[name='barcode']").val($(this).val());
+    }
+
+</script>
+
+<div class="panel col-md-6 col-md-offset-3">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h2>Додавання товару</h2>
+        </div>
+
+        @using (Html.BeginForm("Create", "Admin", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+        {
+            <div class="panel-body">
+
+                @foreach (var property in ViewData.ModelMetadata.Properties)
+            {
+                if (property.PropertyName != "Id" && property.PropertyName != "ImageSrc")
+                {
+                <div class="form-group">
+                    <label>@(property.DisplayName ?? property.PropertyName)</label>
+                    @if (property.PropertyName == "Description")
+                        {
+                @Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows = 5 })
+                        }
+                        else
+                        {
+                @Html.TextBox(property.PropertyName, null, new { @class = "form-control" })
+                        }
+                    @Html.ValidationMessage(property.PropertyName)
+                </div>
+                }
+            }
+
+                <div class="form-group">
+                    <div>
+                        <img id="photo" class="item-image" src="" />
+                    </div>
+                    <br />
+                    <div>
+                        <label class="btn btn-primary" for="fileUpload">
+                            <input id="fileUpload" name="fileUpload" type="file" style="display:none;" accept="images/*">
+                            Завантажити фото
+                        </label>
+                        <span class='label label-info' id="upload-file-info"></span>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="panel-footer">
+                <input type="submit" value="Додати" class="btn btn-success" />
+                @Html.ActionLink("Відмінити", "Index", "Admin", null, new { @class = "btn btn-warning" })
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts{
+<script type="text/javascript">  
+    $("#fileUpload").change(function (event) {
+        $('#photo').fadeIn("fast").attr("src", URL.createObjectURL(event.target.files[0]));
+    });
+</script>
+}
+
+

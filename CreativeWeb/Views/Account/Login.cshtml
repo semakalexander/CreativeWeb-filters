@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Адміністративна панель</h2>
+
+@using (Html.BeginForm("Login","Account",FormMethod.Post,new { @class = "col-xs-offset-2 col-xs-8" }))
+{
+    <div class="panel">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Введіть свій логін та пароль
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label>Логін</label>
+                    @Html.TextBox("Name", null, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label>Пароль</label>
+                    @Html.Password("Password", null, new { @class = "form-control" })
+                </div>
+                <p style="color:red">@TempData["error"]</p>
+                <div class="col-xs-offset-5">
+                    <input type="submit" value="Ввійти" class="btn btn-primary" />
+                </div>
+               
+            </div>
+        </div>             
+    </div>
+   
+}

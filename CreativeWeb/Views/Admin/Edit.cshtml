@@ -1,0 +1,104 @@
+﻿@model CreativeWeb.Models.ItemAndTypes
+@{
+    ViewBag.Title = "Адмін панель: редагування товару";
+    Layout = "~/Views/_AdminLayout.cshtml";
+}
+
+
+
+<div class="panel col-md-offset-2 col-md-8">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h2>Редагування товару @Model.Item.Name</h2>
+        </div>
+
+        @using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+        {
+            <div class="panel-body">
+                @Html.HiddenFor(m => m.Item.Id)
+
+                <div class="form-group">
+                    @Html.HiddenFor(m => m.Item.Barcode)
+                    <label>Штрихкод</label>
+                    @Html.DisplayFor(m => m.Item.Barcode)
+                </div>
+
+                <div class="form-group">
+                    <label>Назва</label>
+                    @Html.TextBoxFor(m => m.Item.Name, null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Item.Name)
+                </div>
+
+                <div class="form-group">
+                    <label>Опис</label>
+                    @Html.TextAreaFor(m => m.Item.Description, new { @class = "form-control", rows = 5 })
+                    @Html.ValidationMessageFor(m => m.Item.Description)
+                </div>
+
+                <div class="form-group">
+                    <label>Ціна</label>
+                    @Html.TextBoxFor(m => m.Item.Price, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Item.Price)
+                </div>
+
+                <div class="form-group">
+                    <label>Кількість</label>
+                    @Html.TextBoxFor(m => m.Item.Count, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Item.Count)
+                </div>
+
+                <div class="form-group">
+                    <label>Список всіх категорій, що є в базі даних</label>
+                    <select id="types" onchange="selectType()">
+                        <option>Вибрати</option>
+                        @foreach (var type in Model.Types)
+                         {
+                            <option>@type</option>
+                            }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Тип</label>
+                    @Html.TextBoxFor(m => m.Item.Type, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Item.Type)
+                </div>
+
+                @Html.HiddenFor(m=>m.Item.ImageSrc)
+                <div class="form-group">
+                    <div>
+                        <img id="photo" class="item-image" src="@Model.Item.ImageSrc" />
+                    </div>
+                    <br />
+                    <div>
+                        <label class="btn btn-primary" for="fileUpload">
+                            <input id="fileUpload" name="fileUpload" type="file" style="display:none;" accept="images/*">
+                            Змінити фото
+                        </label>
+                        <span class='label label-info' id="upload-file-info"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-footer">
+                <input type="submit" value="Зберегти" class="btn btn-success" />
+                @Html.ActionLink("Відмінити", "Index", "Admin", null, new { @class = "btn btn-warning" })
+            </div>
+        }
+    </div>
+</div>
+
+
+@section Scripts{
+
+    <script type="text/javascript">
+        function selectType() {
+            var selectVal = $("select").val();
+            $("input[name='Item.Type']").val(selectVal);
+        };
+
+        $("#fileUpload").change(function (event) {
+            $('#photo').fadeIn("fast").attr("src", URL.createObjectURL(event.target.files[0]));
+        });
+    </script>
+}

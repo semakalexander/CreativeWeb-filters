@@ -1,0 +1,76 @@
+﻿
+
+/* Set padding to keep content from hitting the edges */
+
+html, body{
+    overflow-x: hidden;
+    height: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+}
+
+.advert-img {
+    width: 100%;
+}
+
+.advert-item {
+    padding-bottom: 20px;
+}
+
+.item-image {
+width:245px;
+height:180px;
+    float:none;   
+}
+
+.item-description {
+    background-color: #ffffff;
+    border: none;
+    font-size: 1em;
+}
+.item-description-btn{
+    width:245px;
+}
+
+.cart-item{
+ margin-left:5px;
+}
+
+.cart-item-img{
+    width:75%;
+    float:none;
+   
+}
+pre {
+     white-space: pre-wrap;    
+     width:250px;
+     background-color: #ffffff;
+     border: none;
+}
+
+.quantity-item{
+    width:65px;
+}
+
+.btn-cart{
+       background:url("Images/shopping-cart.svg") no-repeat center;  
+    position:fixed;
+    bottom:25px;
+    right:25px;
+      display:block;
+    width:40px;
+    height:40px;
+ z-index:999;
+  
+}
