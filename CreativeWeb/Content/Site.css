@@ -2,7 +2,7 @@
 
 /* Set padding to keep content from hitting the edges */
 
-html, body{
+html, body {
     overflow-x: hidden;
     height: 100%;
     -webkit-overflow-scrolling: touch;
@@ -11,9 +11,10 @@ html, body{
    will truncate terms that are too long to fit in the left column 
 */
 
-.body-content{
-    margin-top:20px;
+.body-content {
+    margin-top: 20px;
 }
+
 .dl-horizontal dt {
     white-space: normal;
 }
@@ -33,9 +34,9 @@ textarea {
 }
 
 .item-image {
-width:245px;
-height:180px;
-    float:none;   
+    width: 245px;
+    height: 180px;
+    float: none;
 }
 
 .item-description {
@@ -43,47 +44,48 @@ height:180px;
     border: none;
     font-size: 1em;
 }
-.item-description-btn{
-    width:245px;
+
+.item-description-btn {
+    width: 245px;
 }
 
-.cart-item{
- margin-left:5px;
+.cart-item {
+    margin-left: 5px;
 }
 
-.cart-item-img{
-    width:75%;
-    float:none;
-   
+.cart-item-img {
+    width: 75%;
+    float: none;
 }
+
 pre {
-     white-space: pre-wrap;    
-     width:250px;
-     background-color: #ffffff;
-     border: none;
+    white-space: pre-wrap;
+    width: 250px;
+    background-color: #ffffff;
+    border: none;
 }
 
-.quantity-item{
-    width:65px;
+.quantity-item {
+    width: 65px;
 }
 
-.btn-cart{
-       background:url("Images/shopping-cart.svg") no-repeat center;  
-    position:fixed;
-    bottom:25px;
-    right:25px;
-      display:block;
-    width:40px;
-    height:40px;
- z-index:999;
-  
+.btn-cart {
+    background: url("Images/shopping-cart.svg") no-repeat center;
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    display: block;
+    width: 55px;
+    height: 55px;
+    z-index: 999;
+    opacity: 0.8;
 }
 
 
 
-.categories-menu-btn{
-    position:fixed; 
-    left:10px;
-     top:55px;
-     z-index:999;
-     }
+.categories-menu-btn {
+    position: fixed;
+    left: 10px;
+    top: 55px;
+    z-index: 999;
+}

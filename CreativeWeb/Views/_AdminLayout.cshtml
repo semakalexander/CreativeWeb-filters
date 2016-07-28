@@ -1,5 +1,4 @@
 ﻿<!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -9,6 +8,8 @@
     <link href="~/Content/ErrorsStyle.css" rel="stylesheet" />
     <script src="~/Scripts/jquery.min.js"></script>
     <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/AdminStyle.css" rel="stylesheet" />
+
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
@@ -23,7 +24,7 @@
             });
         });
     </script>
-    @RenderSection("Head",required:false)
+    @RenderSection("Head", required: false)
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -31,30 +32,24 @@
             <div class="navbar-header">
                 @Html.ActionLink("Cайт", "Index", "Home",null,new {@class="navbar-brand" })
             </div>
-
             <ul class="nav navbar-nav">
                 <li class="active">@Html.ActionLink("Список товарів", "Index", "Admin")</li>
                 <li>
                     @Html.ActionLink("Додати новий", "Create", "Admin")
                 </li>
-
             </ul>
-
             <ul class="nav navbar-nav navbar-right">
                 <li>@Html.ActionLink("Вийти", "SignOut", "Account")</li>
             </ul>
-
         </div>
     </div>
-    <div>
+    <div class="body-content">
         @if (TempData["message"] != null)
         {
             <div class="alert alert-success">@TempData["message"]</div>
         }
-
         @RenderBody()
     </div>
 </body>
 </html>
-
 @RenderSection("Scripts", required: false)

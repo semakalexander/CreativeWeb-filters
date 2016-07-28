@@ -5,9 +5,11 @@
   position: relative;
   float: left;
   overflow: hidden;
-  margin: 5px 1%;
+  margin: 10px 1%;
   min-width: 200px;
-  max-width: 305px;
+  max-width: 325px;
+ height:500px;
+ overflow-y:auto;
   width: 100%;
   background: #ffffff;
   text-align: left;
@@ -89,7 +91,7 @@
 .snip1418 a {
   position: absolute;
   top: 0;
-  bottom: 0;
+  bottom:0;
   left: 0;
   right: 0;
 }
@@ -103,3 +105,4 @@
 .snip1418.hover .add-to-cart i {
   background-color: #2980b9;
 }
+

@@ -12,89 +12,79 @@
     List<Item> third3 = Model.Skip(6).Take(3).ToList();
 }
 
-@helper CreateRow(List<Item> list) {
-    foreach (var item in list)
+@helper CreateRow(List<Item> list)
+{
+foreach (var item in list)
+{
+
+    using (Html.BeginForm("AddToCart", "Cart"))
     {
-       
-            using (Html.BeginForm("AddToCart", "Cart"))
-            {
             <figure class="snip1418">
                 <img src="@item.ImageSrc" />
                 <div class="add-to-cart"> <i class="ion-android-add"></i><span>Add to Cart</span></div>
                 <figcaption>
-                    <h3>@item.Name</h3>
-                    <p>@item.Description</p>
-                    <div class="price">
-                        @item.Price грн
+                    <div >
+                        <h3>@item.Name</h3>
+
+                        <p>@item.Description</p>
+
+
+                        <div class="price">
+                            @item.Price грн
+                        </div>
                     </div>
+
                 </figcaption>@Html.ActionLink(" ", "AddToCart", "Cart", new { itemId = @item.Id, returnUrl = @Request.Url.PathAndQuery }, null)
+
             </figure>
-            }
-            
-
-         @*   <div class="panel panel-success">
-                <div class="panel-heading">
-                   @item.Name
-                </div>
-
-                <div class="panel-body">
-                    <img class="item-image" src="@item.ImageSrc" />
-                    <button type="button" class="btn btn-default item-description-btn" data-toggle="collapse" data-target="@string.Format("#demo"+item.Id)">Опис</button>
-
-                    <p id="@string.Format("demo"+item.Id)" class="collapse" item-description">@MvcHtmlString.Create(@item.Description.Replace(Environment.NewLine, "<br />"))</p>
-                </div>
-
-                <div class="panel-footer text-right">
-                    @item.Price грн
-                    @using (Html.BeginForm("AddToCart", "Cart"))
-                    {
-                        <input type="hidden" value="@item.Id" name="itemId" />
-                        <input type="hidden" value="@Request.Url.PathAndQuery" name="returnUrl" />
-                        <input type="number" value="1" class="quantity-item" name="quantity" min="1" max="99999">
-                        <input type="submit" value="Додати в корзину" class="btn btn-primary" />
-                    }
-                </div>
-            </div>*@
-     
+        }
     }
 }
 
- @* @foreach (var item in Model)
-    {
-      using (Html.BeginForm("AddToCart", "Cart"))
-      {
-      <figure class="snip1418">
-          <img src="@item.ImageSrc" />
-          <div class="add-to-cart"> <i class="ion-android-add"></i><span>Add to Cart</span></div>
-          <figcaption>
-              <h3>@item.Name</h3>
-              <p>@item.Description</p>
-              <div class="price">
-                  @item.Price грн
-              </div>
-          </figcaption>@Html.ActionLink(" ","AddToCart","Cart",new {itemId=@item.Id,returnUrl= @Request.Url.PathAndQuery },null)
-                   </figure>
-        }
-    } *@
-   
-        <div class="row">
-            @CreateRow(first3)
-        </div>
-        <div class="row">
-           @CreateRow(second3)
-        </div>
-        <div class="row">
-           @CreateRow(third3)
-        </div>
-   
-    @Html.PagedListPager(Model, page => Url.Action("SelectType", new { type = Model.FirstOrDefault().Type, page }))
 
-    @section Scripts{
-        <script type="text/javascript">
-            $(".hover").mouseleave(
-              function () {
-                  $(this).removeClass("hover");
-              }
-            );
-        </script>
+@foreach (var item in Model)
+{
+    using (Html.BeginForm("AddToCart", "Cart"))
+    {
+        <figure class="snip1418">
+            <img src="@item.ImageSrc" />
+            <div class="add-to-cart"> <i class="ion-android-add"></i><span>Додати в корзину</span></div>
+            <figcaption>
+                <div>
+                    <h3>@item.Name</h3>
+
+                    <p>@item.Description</p>
+
+
+                    <div class="price">
+                        @item.Price грн
+                    </div>
+                </div>
+
+            </figcaption>@Html.ActionLink(" ", "AddToCart", "Cart", new { itemId = @item.Id, returnUrl = @Request.Url.PathAndQuery }, null)
+
+        </figure>
     }
+}
+@*
+<div class="row">
+    @CreateRow(first3)
+</div>
+<div class="row">
+    @CreateRow(second3)
+</div>
+<div class="row">
+    @CreateRow(third3)
+</div>
+*@
+@Html.PagedListPager(Model, page => Url.Action("SelectType", new { type = Model.FirstOrDefault().Type, page }))
+
+@section Scripts{
+    <script type="text/javascript">
+        $(".hover").mouseleave(
+          function () {
+              $(this).removeClass("hover");
+          }
+        );
+    </script>
+}
