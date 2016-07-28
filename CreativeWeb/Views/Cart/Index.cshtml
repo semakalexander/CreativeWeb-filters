@@ -53,6 +53,14 @@
 </table>
 
 <div class="text-center">
+    @if (Model.Cart.Lines.Count()>0)
+    {
     <a href="@Model.ReturnUrl" class="btn btn-primary">Продовжити купівлю</a>
     @Html.ActionLink("Оформити замовлення", "Checkout", null, new { @class = "btn btn-success" })
+    }
+    else
+    {
+        <div class="alert alert-warning">Нема товарів в корзині</div>
+    }
+
 </div>
