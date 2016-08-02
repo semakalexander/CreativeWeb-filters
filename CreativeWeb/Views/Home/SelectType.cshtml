@@ -20,7 +20,10 @@
 
                         <h3>@item.Name</h3>
                         <p>@item.Description</p>
-                        <input type="number" name="quantity" min="1" max="999999" value="1"/>
+                        <div class="quantity">
+                            <input type="number" name="quantity" min="1" max="999999" step="1" value="1" />
+                        </div>
+                       
                         <div class="price">
                             @item.Price грн
                         </div>
@@ -41,5 +44,6 @@
               $(this).removeClass("hover");
           }
         );
+      
     </script>
 }

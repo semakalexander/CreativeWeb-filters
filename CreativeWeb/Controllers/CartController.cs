@@ -23,6 +23,7 @@ namespace CreativeWeb.Controllers
             var item = db.Items.FirstOrDefault(it => it.Id == itemId);
             var q = 1;
             int.TryParse(quantity, out q);
+            if (q == 0) q = 1;
             if (item != null)
             {
                 GetCart().AddItem(item, q);
