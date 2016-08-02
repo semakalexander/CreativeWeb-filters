@@ -93,10 +93,10 @@
     
 
         @{
-            Cart cart = (Cart)Session["Cart"];
-            if (cart != null && cart.Lines.Count() > 0)
+            var cart = (Cart)Session["Cart"];
+            if (cart != null && cart.Lines.Any())
             {
-              @Html.ActionLink(" ", "Index", "Cart", null, new { @class = "btn btn-default btn-cart" })
+              @Html.ActionLink(" ", "Index", "Cart", new {returnUrl=Request.Url.PathAndQuery}, new { @class = "btn btn-default btn-cart" })
             }
         }
       

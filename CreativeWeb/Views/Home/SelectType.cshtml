@@ -5,78 +5,33 @@
     ViewBag.Title = Model.FirstOrDefault().Type;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-@{
-    List<Item> first3 = Model.Take(3).ToList();
-    List<Item> second3 = Model.Skip(3).Take(3).ToList();
-    List<Item> third3 = Model.Skip(6).Take(3).ToList();
-}
-
-@helper CreateRow(List<Item> list)
-{
-foreach (var item in list)
-{
-
-    using (Html.BeginForm("AddToCart", "Cart"))
+<div class="row">
+    @foreach (var item in Model)
     {
+        using (Html.BeginForm("AddToCart", "Cart"))
+        {
             <figure class="snip1418">
-                <img src="@item.ImageSrc" />
-                <div class="add-to-cart"> <i class="ion-android-add"></i><span>Add to Cart</span></div>
+                <img src="@item.ImageSrc" alt=""/>
+                <div class="add-to-cart"> <i class="ion-android-add"></i><span>Додати в корзину</span></div>
                 <figcaption>
-                    <div >
+                    <div>
+                        <input type="hidden" name="itemId" value="@item.Id"/>
+                        <input type="hidden" name="returnUrl" value="@Request.Url.PathAndQuery" />
+
                         <h3>@item.Name</h3>
-
                         <p>@item.Description</p>
-
-
+                        <input type="number" name="quantity" min="1" max="999999" value="1"/>
                         <div class="price">
                             @item.Price грн
                         </div>
                     </div>
-
-                </figcaption>@Html.ActionLink(" ", "AddToCart", "Cart", new { itemId = @item.Id, returnUrl = @Request.Url.PathAndQuery }, null)
-
+                </figcaption>@*@Html.ActionLink(" ", "AddToCart", "Cart", new { itemId = @item.Id, returnUrl = @Request.Url.PathAndQuery }, null)
+                <input type="submit" class="cart-link" value="Додати в корзину"/>*@
+                <a href="#" onclick="$(this).closest('form').submit()"></a>
             </figure>
         }
     }
-}
-
-
-@foreach (var item in Model)
-{
-    using (Html.BeginForm("AddToCart", "Cart"))
-    {
-        <figure class="snip1418">
-            <img src="@item.ImageSrc" />
-            <div class="add-to-cart"> <i class="ion-android-add"></i><span>Додати в корзину</span></div>
-            <figcaption>
-                <div>
-                    <h3>@item.Name</h3>
-
-                    <p>@item.Description</p>
-
-
-                    <div class="price">
-                        @item.Price грн
-                    </div>
-                </div>
-
-            </figcaption>@Html.ActionLink(" ", "AddToCart", "Cart", new { itemId = @item.Id, returnUrl = @Request.Url.PathAndQuery }, null)
-
-        </figure>
-    }
-}
-@*
-<div class="row">
-    @CreateRow(first3)
 </div>
-<div class="row">
-    @CreateRow(second3)
-</div>
-<div class="row">
-    @CreateRow(third3)
-</div>
-*@
 @Html.PagedListPager(Model, page => Url.Action("SelectType", new { type = Model.FirstOrDefault().Type, page }))
 
 @section Scripts{

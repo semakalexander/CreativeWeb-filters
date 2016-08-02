@@ -1,8 +1,5 @@
 ﻿using CreativeWeb.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace CreativeWeb.Controllers
@@ -21,11 +18,11 @@ namespace CreativeWeb.Controllers
             });
         }
 
-        public RedirectToRouteResult AddToCart(int itemId, string returnUrl, string quantity="1")
-        {           
-            Item item = db.Items
-                .Where(it => it.Id == itemId).FirstOrDefault();
-      int q=      Convert.ToInt32(quantity);
+        public RedirectToRouteResult AddToCart(int itemId, string returnUrl, string quantity)
+        {
+            var item = db.Items.FirstOrDefault(it => it.Id == itemId);
+            var q = 1;
+            int.TryParse(quantity, out q);
             if (item != null)
             {
                 GetCart().AddItem(item, q);
@@ -34,10 +31,18 @@ namespace CreativeWeb.Controllers
 
         }
 
+        public void ChangeQuantity(int id, int quantity)
+        {
+            CartLine line = GetCart().Lines.FirstOrDefault(it => it.Item.Id == id);
+            if (line != null)
+            {
+                line.Quantity = quantity;
+            }
+        }
+
         public RedirectToRouteResult RemoveFromCart(int itemId, string returnUrl)
         {
-            Item item = db.Items
-                .Where(it => it.Id == itemId).FirstOrDefault();
+            Item item = db.Items.FirstOrDefault(it => it.Id == itemId);
             if (item != null)
             {
                 GetCart().RemoveLine(item);
@@ -48,12 +53,11 @@ namespace CreativeWeb.Controllers
 
         public Cart GetCart()
         {
-            Cart cart = (Cart)Session["Cart"];
-            if (cart == null)
-            {
-                cart = new Cart();
-                Session["Cart"] = cart;
-            }
+            var cart = (Cart)Session["Cart"];
+            if (cart != null)
+                return cart;
+            cart = new Cart();
+            Session["Cart"] = cart;
             return cart;
         }
 
