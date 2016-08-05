@@ -7,33 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")
-    <script src="~/Scripts/jquery.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/bootstrap-filestyle.min.js"></script>
-
+    
+    <link href="~/Content/jquery.custom-scroll.css" rel="stylesheet" />
     <link href="~/Content/Items.css" rel="stylesheet" />
     <link href="~/Content/pushy.css" rel="stylesheet" />
     <link href="~/Content/demo.css" rel="stylesheet" />
     <link href="~/Content/normalize.css" rel="stylesheet" />
-    <script type="text/javascript">
-        $(function () {
-            $(".item-image").error(function () {
-                $(this).attr({
-                    src: '/Content/Images/ItemDefault.jpg'
-                });
-            });
-        });
-        $(function () {
-            $(".cart-item-img").error(function () {
-                $(this).attr({
-                    src: '/Content/Images/ItemDefault.jpg'
-                });
-            });
-        });
-
-       
-    </script>
+  
 </head>
 <body>
     <nav class="pushy pushy-left">
@@ -45,20 +25,13 @@
             <li>@Html.ActionLink("Penzlyk", "SelectType", "Home", new { type = "Penzlyk" }, new { @class = "pushy-link" })</li>
             <li>@Html.ActionLink("Pidramnyk", "SelectType", "Home", new { type = "Pidramnyk" }, new { @class = "pushy-link" })</li>
             <li>@Html.ActionLink("Pydramnik", "SelectType", "Home", new { type = "Pydramnik" }, new { @class = "pushy-link" })</li>
-        
-        </ul>
-        
-    </nav>
-
+        </ul>        
+    </nav>  
    
-    <!-- Site Overlay -->
     <div class="site-overlay"></div>
-
-    <!-- Your Content -->
-    <div id="container">
-        <!-- Menu Button -->
+    
+    <div id="container">      
         <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-
             <div class="container-fluid">
                 <div class="navbar-header">
                     @Html.ActionLink("CREATIVE", "Index", "Home", null, new { @class = "navbar-brand" })
@@ -85,68 +58,22 @@
             </div>
         </div>
 
-
-
+        <!--SideBar menu-->
         <div class="categories-menu-btn"> 
             <div class="menu-btn">&#9776; Категорії</div>
         </div>
-    
 
+        <!--Cart Button-->
         @{
             var cart = (Cart)Session["Cart"];
             if (cart != null && cart.Lines.Any())
             {
               @Html.ActionLink(" ", "Index", "Cart", new {returnUrl=Request.Url.PathAndQuery}, new { @class = "btn btn-default btn-cart" })
             }
-        }
-      
-
+        }     
 
         <div class="body-content">
-            <div class="row">
-                @*       <div id="categories-left" class="col-md-2">
-                        <div class="list-group">
-                            @Html.ActionLink("Penzlyk", "SelectType", "Home", new { type = "Penzlyk" }, new { @class = "list-group-item" })
-                            @Html.ActionLink("Pidramnyk", "SelectType", "Home", new { type = "Pidramnyk" }, new { @class = "list-group-item" })
-                            @Html.ActionLink("Pydramnik", "SelectType", "Home", new { type = "Pydramnik" }, new { @class = "list-group-item" })
-
-                            <a href="#" class="list-group-item">4 category</a>
-                            <a href="#" class="list-group-item">5 category</a>
-                            <a href="#" class="list-group-item">6 category</a>
-                            <a href="#" class="list-group-item">7 category</a>
-                        </div>
-                        @{
-                            Cart cart = (Cart)Session["Cart"];
-                            if (cart != null && cart.Lines.Count() > 0)
-                            {
-                                <div id="cart-panel">
-                                    <div class="panel panel-primary">
-                                        <div class="panel-heading">
-                                            <h4>Корзина </h4>
-                                        </div>
-                                        <div class="panel-body">
-                                            @Html.ActionLink("Перейти до корзини", "Index", "Cart", new { returnUrl = Request.Url.PathAndQuery }, null)
-                                            @foreach (var line in cart.Lines)
-                                            {
-
-                                                <div class="row cart-item">
-                                                    <img src="@line.Item.ImageSrc" alt="" class="cart-item-img" />
-                                                    <p>
-                                                        @line.Item.Name - @line.Quantity шт.
-                                                    </p>
-                                                </div>
-                                                <br />
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-                        }
-                    </div>*@
-
-
-
-
+            <div class="row">      
                 <div class="col-md-10 main-content">
                     @RenderBody()
                 </div>
@@ -166,16 +93,33 @@
                 </div>
             </div>
         </div>
-
-
-
     </div>
    
     <footer></footer>
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap-filestyle.min.js"></script>
+    <script src="~/Scripts/jquery.custom-scroll.min.js"></script>
     @RenderSection("scripts", required: false)
     <script src="~/Scripts/pushy.min.js"></script>
     <script src="~/Scripts/InputNumberStyle.js"></script>
-
+    <script type="text/javascript">
+        $(function () {
+            $(".item-image").error(function () {
+                $(this).attr({
+                    src: '/Content/Images/ItemDefault.jpg'
+                });
+            });
+        });
+        $(function () {
+            $(".cart-item-img").error(function () {
+                $(this).attr({
+                    src: '/Content/Images/ItemDefault.jpg'
+                });
+            });
+        });
+    </script>
 </body>
 
 

@@ -206,6 +206,7 @@
     <Content Include="Content\Images\Items\ttr-34Penzlyk good.jpg" />
     <Content Include="Content\Images\Items\ttr43.jpg" />
     <Content Include="Content\Items.css" />
+    <Content Include="Content\jquery.custom-scroll.css" />
     <Content Include="Content\normalize.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\pushy.css" />
@@ -235,6 +236,7 @@
     <Content Include="Scripts\InputNumberStyle.js" />
     <Content Include="Scripts\jquery-2.2.4.js" />
     <Content Include="Scripts\jquery-2.2.4.min.js" />
+    <Content Include="Scripts\jquery.custom-scroll.min.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />

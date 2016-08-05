@@ -11,25 +11,24 @@
         using (Html.BeginForm("AddToCart", "Cart"))
         {
             <figure class="snip1418">
-                <img src="@item.ImageSrc" alt=""/>
+                <img src="@item.ImageSrc" alt="" />
                 <div class="add-to-cart"> <i class="ion-android-add"></i><span>Додати в корзину</span></div>
                 <figcaption>
                     <div>
-                        <input type="hidden" name="itemId" value="@item.Id"/>
+                        <input type="hidden" name="itemId" value="@item.Id" />
                         <input type="hidden" name="returnUrl" value="@Request.Url.PathAndQuery" />
 
                         <h3>@item.Name</h3>
                         <p>@item.Description</p>
-                        <div class="quantity">
-                            <input type="number" name="quantity" min="1" max="999999" step="1" value="1" />
-                        </div>
-                       
-                        <div class="price">
-                            @item.Price грн
-                        </div>
+
+                            <div class="quantity">
+                                <input type="number" name="quantity" min="1" max="999999" step="1" value="1" />
+                            </div>
+                            <div class="price">
+                                @item.Price грн
+                            </div>
                     </div>
-                </figcaption>@*@Html.ActionLink(" ", "AddToCart", "Cart", new { itemId = @item.Id, returnUrl = @Request.Url.PathAndQuery }, null)
-                <input type="submit" class="cart-link" value="Додати в корзину"/>*@
+                </figcaption>
                 <a href="#" onclick="$(this).closest('form').submit()"></a>
             </figure>
         }
@@ -44,6 +43,8 @@
               $(this).removeClass("hover");
           }
         );
-      
+        $('.snip1418').customScroll({
+            horizontal: false
+        });
     </script>
 }
