@@ -1,0 +1,13 @@
+import os
+import tinify
+
+
+tinify.key="CIjBGIrsj3QKPj3Emr4OlqYkjM_baoHD"
+
+os.chdir("Images")
+
+
+for i in os.listdir():
+	if os.path.isfile(i):
+		source = tinify.from_file(i).to_file(i)	
+		print(str(i))
